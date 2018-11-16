@@ -1,5 +1,4 @@
 import { Cell } from "../src/Cell";
-import { Organism } from "../src/Organism";
 
 describe('we test cells', () => {
     test('cell is defined', () => {
@@ -16,7 +15,7 @@ describe('we test cells', () => {
             }
         }
         
-        const cell = new Cell(Organism, [{...neighbour}, {...neighbour}, {...neighbour}, {...neighbour}])
+        const cell = new Cell({}, [{...neighbour}, {...neighbour}, {...neighbour}, {...neighbour}])
         
         cell.dispatch()
         expect(timeCalled).toBe(0)
@@ -33,7 +32,7 @@ describe('we test cells', () => {
             }
         }
         
-        const cell = new Cell(Organism, [{...neighbour}, {...neighbour}, {...neighbour}, {...neighbour}])
+        const cell = new Cell({}, [{...neighbour}, {...neighbour}, {...neighbour}, {...neighbour}])
         
         cell.dispatch(8)
         expect(timeCalled).toBe(4)
