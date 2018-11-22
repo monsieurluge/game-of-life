@@ -22,6 +22,9 @@ export const Cell = (OrganismFactory, neighbours) => {
         },
         receive: (spores) => {
             totalSpores += spores;
+        }, 
+        dying: () => {
+            organism = undefined
         }
     };
 };
