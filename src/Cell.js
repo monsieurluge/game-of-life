@@ -1,7 +1,16 @@
-export const Cell = (OrganismFactory, neighbours) => {
+export const Cell = (OrganismFactory, x, y) => {
     let totalSpores = 0;
     let organism;
+    var neighbours = 'test';    
+
+    const add = (newNeighbours) => {
+        neighbours = 'nope'//newNeighbours.concat()
+    }
+
     return {
+        n: neighbours,
+        position: {x, y},
+        add,
         dispatch: (spores) => {
             if (spores === undefined) {
                 return;
@@ -25,6 +34,9 @@ export const Cell = (OrganismFactory, neighbours) => {
         }, 
         dying: () => {
             organism = undefined
+        },
+        render: (ctx, width, height) => {
+            ctx.rect(1, 1,width-2,height-2);
         }
     };
 };
