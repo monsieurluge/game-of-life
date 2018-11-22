@@ -3,13 +3,13 @@ export const Organism = (cell) => {
     return {
         feed: (spores) => {
             if (2 === spores && 0 === age) {
-                cell.dying(this);
+                cell.dying();
             }
             if (2 > spores) {
-                cell.dying(this);
+                cell.dying();
             }
             if (3 < spores) {
-                cell.dying(this);
+                cell.dying();
             }
             age++;
         },
