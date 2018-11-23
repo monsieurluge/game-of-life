@@ -4,7 +4,8 @@ export default (Organism, x, y) => {
     let neighbours = []
 
     return {
-        n: neighbours,
+        //p: {x, y},
+        //n: neighbours,
         add: (newNeighbour) => {
             newNeighbour.map(n => neighbours.push(n))
         },
