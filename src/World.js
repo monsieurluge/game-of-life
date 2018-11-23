@@ -1,5 +1,9 @@
 import Cell from './Cell'
 
+function range(start, end) {
+    return [...Array(end-start+1).keys()].map(i => i + start);
+}
+
 export default (width, height) => {
     
     const GRID_WIDTH = 10
