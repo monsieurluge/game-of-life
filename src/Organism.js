@@ -1,4 +1,4 @@
-export const Organism = (cell) => {
+export default (cell) => {
     let age = 0;
     return {
         feed: (spores) => {

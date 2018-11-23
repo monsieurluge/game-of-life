@@ -1,6 +1,6 @@
-import { Cell } from './Cell'
+import Cell from './Cell'
 
-export const World = (width, height) => {
+export default (width, height) => {
     
     const GRID_WIDTH = 10
     const GRID_HEIGHT = 10
@@ -15,7 +15,6 @@ export const World = (width, height) => {
         }
     }
 
-    
     //
 
     cells.forEach((row, rowIndex) => row.forEach((cell, col) => {
