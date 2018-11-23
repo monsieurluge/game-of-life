@@ -21,34 +21,29 @@ export default (width, height) => {
 
     //
 
-    cells.forEach((row, rowIndex) => row.forEach((cell, col) => {
+    cells.forEach((row, y) => row.forEach((cell, x) => {
         const neighbours = []
 
         const notMe = (x, y) => {
-            return x != 0 && y != 0;            
+            return !(x == 0 && y == 0);            
         }
 
         const inBound = (x, y) => {
-            return y>0
+            return y>=0
                 && y<height
-                && x>0
+                && x>=0
                 && x<width
         }
 
-        for(let x = -1;x <= 1; x++) {
-            for(let y = -1;y <= 1; y++) {
-                if(notMe(x, y) && inBound(rowIndex+y, col+x)) {
-                    //console.log("QSDFQSDQMKSDJQMSKDJQMSDJ")
-                    neighbours.push(cells[rowIndex+y][col+x])
+        range(-1, 1).forEach(offsetX => {
+            range(-1, 1).forEach(offsetY => {
+                if(notMe(offsetX, offsetY) && inBound(y+offsetY, x+offsetX)) {
+                    neighbours.push(cells[y+offsetY][x+offsetX])
                 }
-            }
-        }
-
-
-        console.log('before', cell)
-        console.log('neighbours', neighbours)
+            })
+        })
+        
         cell.add(neighbours)
-        console.log('after', cell)
     }))
 
     console.log(cells)
