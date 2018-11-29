@@ -6,6 +6,12 @@ describe('we test cells', () => {
         expect(cell).toBeDefined()
     })
 
+    test('cell can have neighbours', () => {
+        const cell = Cell()
+
+        expect(cell.add).toBeDefined()
+    })
+
     test('cell do not dispatch any spore if', () => {
         let timeCalled = 0;
         
@@ -15,8 +21,10 @@ describe('we test cells', () => {
             }
         }
         
-        const cell = new Cell({}, [{...neighbour}, {...neighbour}, {...neighbour}, {...neighbour}])
+        const cell = Cell()
         
+        cell.add([{...neighbour}, {...neighbour}, {...neighbour}, {...neighbour}])
+
         cell.dispatch()
         expect(timeCalled).toBe(0)
     })
@@ -32,8 +40,10 @@ describe('we test cells', () => {
             }
         }
         
-        const cell = new Cell({}, [{...neighbour}, {...neighbour}, {...neighbour}, {...neighbour}])
+        const cell = Cell()
         
+        cell.add([{...neighbour}, {...neighbour}, {...neighbour}, {...neighbour}])
+
         cell.dispatch(8)
         expect(timeCalled).toBe(4)
     })
