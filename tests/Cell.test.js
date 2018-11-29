@@ -12,17 +12,17 @@ describe('we test cells', () => {
         expect(cell.add).toBeDefined()
     })
 
-    test('cell do not dispatch any spore if', () => {
+    test('cell do not dispatch any spore if she did not receive at least one spore', () => {
         let timeCalled = 0;
-        
+
         const neighbour = {
-            receive: () => { 
+            receive: () => {
                 timeCalled++
             }
         }
-        
+
         const cell = Cell()
-        
+
         cell.add([{...neighbour}, {...neighbour}, {...neighbour}, {...neighbour}])
 
         cell.dispatch()
@@ -32,19 +32,28 @@ describe('we test cells', () => {
 
     test('cell dispatch one spore to each neighbour', () => {
         let timeCalled = 0;
-        
+
         const neighbour = {
-            receive: (spores) => { 
+            getPosition: () =>  {},
+            receive: (spores) => {
                 expect(spores).toBe(1)
                 timeCalled++
             }
         }
-        
-        const cell = Cell()
-        
+
+        const OrganismMock = () => {
+            return {
+                live: () => {}
+            }
+        }
+
+        const cell = Cell(OrganismMock)
+
         cell.add([{...neighbour}, {...neighbour}, {...neighbour}, {...neighbour}])
 
-        cell.dispatch(8)
+        cell.receive(1)
+        cell.incubate()
+        cell.dispatch()
         expect(timeCalled).toBe(4)
     })
 
@@ -57,7 +66,7 @@ describe('we test cells', () => {
         cell.incubate()
 
         expect(timeCalled).toBe(0)
-    }) 
+    })
 
     test('he is alive ! alive !', () => {
 
@@ -73,7 +82,7 @@ describe('we test cells', () => {
         cell.incubate()
 
         expect(timeCalled).toBe(1)
-    }) 
+    })
 
     test('an organism has to exist in order to be fed', () => {
 
@@ -87,7 +96,7 @@ describe('we test cells', () => {
         cell.eatSpores()
 
         expect(timeCalled).toBe(0)
-    }) 
+    })
 
     test('an organism has to be fed', () => {
 
@@ -105,7 +114,7 @@ describe('we test cells', () => {
         cell.eatSpores()
 
         expect(timeCalled).toBe(1)
-    }) 
+    })
 
     test('cell can render itself', () => {
         const cell = Cell()

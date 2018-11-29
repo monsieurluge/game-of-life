@@ -1,6 +1,6 @@
 export default (Organism, x, y) => {
-    let totalSpores = 0;
-    let organism;
+    let totalSpores = 0
+    let organism
     let neighbours = []
 
     function getPosition() {
@@ -12,32 +12,36 @@ export default (Organism, x, y) => {
         add: (newNeighbour) => {
             newNeighbour.map(n => neighbours.push(n))
         },
-        dispatch: (spores) => {
-            if (spores === undefined) {
-                return;
+        dispatch: () => {
+            if (organism) {
+                neighbours.map(neighbour => {
+                    neighbour.receive(1)
+                });
             }
-            neighbours.map(neighbour => neighbour.receive(1));
         },
         eatSpores: () => {
             if (organism) {
-                organism.feed(totalSpores);
+                organism.feed(totalSpores)
             }
+            totalSpores = 0
         },
-        incubate: () => {
+        incubate: (cell) => {
             if (0 === totalSpores) {
-                return;
+                return
             }
-            organism = organism || Organism(this);
-            organism.live();
+            organism = organism || Organism(cell)
+            organism.live()
         },
         receive: (spores) => {
-            totalSpores += spores;
-        }, 
+            totalSpores += spores
+        },
         dying: () => {
             organism = undefined
         },
         render: (ctx, width, height) => {
-            ctx.rect(1, 1,width-2,height-2);
+            if(organism) {
+                ctx.rect(1, 1, width-2,height-2);
+            }
         }
     };
 }
