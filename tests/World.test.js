@@ -5,4 +5,10 @@ describe('we test world', () => {
         const world = World()
         expect(world).toBeDefined()
     })
+
+    test('world can render itself', () => {
+        const world = World()
+
+        expect(world.render).toBeDefined()
+    })
 })
