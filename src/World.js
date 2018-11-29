@@ -1,10 +1,8 @@
-import Cell from './Cell'
-
 function range(start, end) {
     return [...Array(end-start+1).keys()].map(i => i + start);
 }
 
-export default (width, height) => {
+export default (CellFactory, width, height) => {
     
     const GRID_WIDTH = 10
     const GRID_HEIGHT = 10
@@ -15,7 +13,7 @@ export default (width, height) => {
     for(let row = 0;row < height; row++) {
         cells[row] = []
         for(let col = 0;col < width; col++) {
-            cells[row][col] = Cell({}, row, col)
+            cells[row][col] = CellFactory({}, row, col)
         }
     }
 
@@ -46,7 +44,7 @@ export default (width, height) => {
         cell.add(neighbours)
     }))
 
-    console.log(cells)
+    //console.log(cells)
 
     const getCoords = (col, row) => {
         return {
