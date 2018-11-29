@@ -106,4 +106,10 @@ describe('we test cells', () => {
 
         expect(timeCalled).toBe(1)
     }) 
+
+    test('cell can render itself', () => {
+        const cell = Cell()
+
+        expect(cell.render).toBeDefined()
+    })
 })
