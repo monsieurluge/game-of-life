@@ -82,7 +82,7 @@ describe('we test cells', () => {
             timeCalled++
         }
 
-        const cell = Cell(OrganismMock, [])
+        const cell = Cell(OrganismMock)
         cell.incubate()
         cell.eatSpores()
 
@@ -99,7 +99,7 @@ describe('we test cells', () => {
             }
         }
 
-        const cell = Cell(OrganismMock, [])
+        const cell = Cell(OrganismMock)
         cell.receive(3)
         cell.incubate()
         cell.eatSpores()
