@@ -1,8 +1,8 @@
-import { Cell } from "../src/Cell";
+import Cell from "../src/Cell";
 
 describe('we test cells', () => {
     test('cell is defined', () => {
-        const cell = new Cell()
+        const cell = Cell()
         expect(cell).toBeDefined()
     })
 
@@ -43,7 +43,7 @@ describe('we test cells', () => {
         let timeCalled = 0
         const OrganismMock = () => timeCalled++
 
-        const cell = new Cell(OrganismMock, [])
+        const cell = Cell(OrganismMock)
         cell.incubate()
 
         expect(timeCalled).toBe(0)
@@ -58,7 +58,7 @@ describe('we test cells', () => {
             }
         }
 
-        const cell = new Cell(OrganismMock, [])
+        const cell = Cell(OrganismMock)
         cell.receive(3)
         cell.incubate()
 
@@ -72,7 +72,7 @@ describe('we test cells', () => {
             timeCalled++
         }
 
-        const cell = new Cell(OrganismMock, [])
+        const cell = Cell(OrganismMock, [])
         cell.incubate()
         cell.eatSpores()
 
@@ -89,7 +89,7 @@ describe('we test cells', () => {
             }
         }
 
-        const cell = new Cell(OrganismMock, [])
+        const cell = Cell(OrganismMock, [])
         cell.receive(3)
         cell.incubate()
         cell.eatSpores()

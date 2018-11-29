@@ -1,4 +1,4 @@
-import { World } from '../src/World'
+import World from '../src/World'
 
 describe('we test world', () => {
     test('world is defined', () => {

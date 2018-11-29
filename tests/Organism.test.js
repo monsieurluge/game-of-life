@@ -1,8 +1,8 @@
-import { Organism } from "../src/Organism";
+import Organism from "../src/Organism";
 
 describe('we test organisms', () => {
     test('organism is defined', () => {
-        const organism = new Organism()
+        const organism = Organism()
         expect(organism).toBeDefined()
     })
 
@@ -13,7 +13,7 @@ describe('we test organisms', () => {
             dispatch: () => { timeCalled++ }        
         }
 
-        const organism = new Organism( mockedCell )
+        const organism = Organism( mockedCell )
         organism.spread()
         expect(timeCalled).toBe(1)
     })
@@ -25,7 +25,7 @@ describe('we test organisms', () => {
             eatSpores: () => { timeCalled++ }        
         }
 
-        const organism = new Organism( mockedCell )
+        const organism = Organism( mockedCell )
         organism.live()
         expect(timeCalled).toBe(1)
     })
@@ -37,7 +37,7 @@ describe('we test organisms', () => {
             dying: () => { timeCalled++ }        
         }
 
-        const organism = new Organism( mockedCell )
+        const organism = Organism( mockedCell )
 
         organism.feed(3)
 
@@ -52,7 +52,7 @@ describe('we test organisms', () => {
             dying: () => { timeCalled++ }        
         }
 
-        const organism = new Organism( mockedCell )
+        const organism = Organism( mockedCell )
         organism.feed(2)
 
         expect(timeCalled).toBe(1)
@@ -65,7 +65,7 @@ describe('we test organisms', () => {
             dying: () => { timeCalled++ }        
         }
 
-        const organism = new Organism( mockedCell )
+        const organism = Organism( mockedCell )
         organism.feed(3)
         organism.feed(2)
 
@@ -79,7 +79,7 @@ describe('we test organisms', () => {
             dying: () => { timeCalled++ }        
         }
 
-        const organism = new Organism( mockedCell )
+        const organism = Organism( mockedCell )
         organism.feed(1)
 
         expect(timeCalled).toBe(1)
@@ -92,7 +92,7 @@ describe('we test organisms', () => {
             dying: () => { timeCalled++ }        
         }
 
-        const organism = new Organism( mockedCell )
+        const organism = Organism( mockedCell )
         organism.feed(4)
 
         expect(timeCalled).toBe(1)
