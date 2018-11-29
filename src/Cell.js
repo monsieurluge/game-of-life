@@ -3,9 +3,12 @@ export default (Organism, x, y) => {
     let organism;
     let neighbours = []
 
+    function getPosition() {
+        return {x, y}
+    }
+
     return {
-        //p: {x, y},
-        //n: neighbours,
+        getPosition,
         add: (newNeighbour) => {
             newNeighbour.map(n => neighbours.push(n))
         },
