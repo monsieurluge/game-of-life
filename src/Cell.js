@@ -27,7 +27,7 @@ export default (Organism, x, y) => {
             if (0 === totalSpores) {
                 return;
             }
-            organism = organism || OrganismFactory(this);
+            organism = organism || Organism(this);
             organism.live();
         },
         receive: (spores) => {
