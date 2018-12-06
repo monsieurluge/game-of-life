@@ -10,47 +10,10 @@ describe('we test world', () => {
         }
 
         // WHEN
-        const world = World(CellMock, {}, 3, 3)
+        const world = World(CellMock, {})
 
         // THEN
         expect(world).toBeDefined()
-    })
-
-    test('world creates grid filled with Cell', () => {
-        // GIVEN
-        let timeCalled = 0;
-
-        const CellMock = () => {
-            timeCalled++
-
-            return {
-                add: () => {},
-                incubate: () => {},
-            }
-        }
-
-        // WHEN
-        World(CellMock, {}, 3, 3)
-
-        // THEN
-        expect(timeCalled).toBe(9)
-    })
-
-    test('the neighbours are added to the cells', () => {
-        // GIVEN
-        let timeCalled = 0;
-
-        const CellMock = () => {
-            return {
-                add: () => { timeCalled++ },
-            }
-        }
-
-        // WHEN
-        World(CellMock, {}, 2, 5)
-
-        // THEN
-        expect(timeCalled).toBe(10)
     })
 
     test('world can render itself', () => {
@@ -60,9 +23,8 @@ describe('we test world', () => {
                 add: () => {},
             }
         }
-
         // WHEN
-        const world = World(CellMock, {}, 0, 0)
+        const world = World(CellMock, {})
 
         // THEN
         expect(world.render).toBeDefined()
@@ -77,7 +39,7 @@ describe('we test world', () => {
         }
 
         // WHEN
-        const world = World(CellMock, {}, 0, 0)
+        const world = World(CellMock, {})
 
         // WHEN, THEN
         expect(world.startCycle).toBeDefined()
@@ -85,6 +47,8 @@ describe('we test world', () => {
 
     test('when world initializes, each marked cell receive n spores', () => {
         // GIVEN
+        let cellsCreated = 0;
+        let neighboursAdded = 0;
         let sporesDispatched = 0;
         let incubateCalled = 0;
 
@@ -96,19 +60,23 @@ describe('we test world', () => {
         ]
 
         const CellMock = () => {
+            cellsCreated++
+
             return {
-                add: () => {},
+                add: () => { neighboursAdded++ },
                 incubate: () => { incubateCalled++ },
                 receive: (spores) => { sporesDispatched += spores }
             }
         }
 
-        const world = World(CellMock, {}, 3, 3)
+        const world = World(CellMock, {})
 
         // WHEN
-        world.initialize(initialDispatch)
+        world.initialize(3, 3, initialDispatch)
 
         // THEN
+        expect(cellsCreated).toBe(9)
+        expect(neighboursAdded).toBe(9)
         expect(sporesDispatched).toBe(10)
         expect(incubateCalled).toBe(4)
     })
@@ -126,9 +94,10 @@ describe('we test world', () => {
             }
         }
 
-        const world = World(CellMock, {}, 3, 3)
+        const world = World(CellMock, {})
 
         // WHEN
+        world.initialize(3, 3, [])
         world.startCycle()
 
         // THEN

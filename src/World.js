@@ -1,32 +1,26 @@
-function range(start, end) {
-    return [...Array(end-start+1).keys()].map(i => i + start);
-}
-
-export default (CellFactory, OrganismFactory, width, height) => {
+export default (CellFactory, OrganismFactory) => {
 
     const GRID_WIDTH = 10
     const GRID_HEIGHT = 10
 
-    const positionedCells = [];
+    let locations = [];
+
+    const createLocations = (width, height) => {
+        locations = []
+
+        for(let i = 0; i< width * height; i++) {
+            locations.push({
+                cell: CellFactory(OrganismFactory),
+                position: { x: i % width, y: Math.floor(i / height) }
+            })
+        }
+    }
 
     const isNeighbourOf = source => target => {
         return target.cell !== source.cell
             && Math.abs(target.position.x - source.position.x) <= 1
             && Math.abs(target.position.y - source.position.y) <= 1
     }
-
-    range(0, width*height - 1).forEach(i => {
-        positionedCells.push({
-            cell: CellFactory(OrganismFactory),
-            position: { x: i % width, y: Math.floor(i / height) }
-        })
-    })
-
-    positionedCells.forEach(source => {
-        source.cell.add(positionedCells
-            .filter(isNeighbourOf(source))
-            .map(positionedCell => positionedCell.cell))
-    })
 
     const getCoords = (col, row) => {
         return {
@@ -47,7 +41,7 @@ export default (CellFactory, OrganismFactory, width, height) => {
         context.translate(-coords.x, -coords.y)
     }
 
-    const initializeCell = dispatch => positionedCells
+    const initializeCell = dispatch => locations
         .filter(findCellAt(dispatch))
         .map(generateOrganism(dispatch.spores))
 
@@ -58,16 +52,29 @@ export default (CellFactory, OrganismFactory, width, height) => {
         cell.incubate(cell)
     }
 
-    const initialize = initialDispatch => initialDispatch.forEach(initializeCell)
+    const createNeighbourhood = location => {
+        location.cell.add(locations
+            .filter(isNeighbourOf(location))
+            .map(location => location.cell)
+        )
+    }
+
+    const initialize = (width, height, initialDispatch) => {
+        createLocations(width, height)
+
+        locations.map(createNeighbourhood)
+
+        initialDispatch.forEach(initializeCell)
+    }
 
     const render = (context, width, height) => {
         context.clearRect(0, 0, width, height);
-        positionedCells.forEach(positionedCell => renderCellWith(context)(positionedCell))
+        locations.forEach(positionedCell => renderCellWith(context)(positionedCell))
     }
 
     const startCycle = () => {
-        positionedCells.forEach(({cell}) => cell.dispatch())
-        positionedCells.forEach(({cell}) => cell.incubate(cell))
+        locations.forEach(({cell}) => cell.dispatch())
+        locations.forEach(({cell}) => cell.incubate(cell))
     }
 
     return { initialize, render, startCycle }

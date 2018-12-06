@@ -109,13 +109,13 @@ const initialDispatch = buildPattern('block', 1, 2)
     */
 
 
-const world = World(Cell, Organism, 50,50)
+const world = World(Cell, Organism)
 
-world.initialize(initialDispatch)
+world.initialize(50, 50, initialDispatch)
 world.render(ctx, canvas.width, canvas.height)
 
 
 window.setInterval(() => {
     world.startCycle()
     world.render(ctx, canvas.width, canvas.height)
-}, 50)
+}, 150)
