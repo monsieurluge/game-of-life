@@ -60,7 +60,6 @@ describe('we test organisms', () => {
         expect(timeCalled).toBe(0)
     })
 
-
     test('feed 2 spores => die if first meal', () => {
         // GIVEN
         let timeCalled = 0;
@@ -127,5 +126,13 @@ describe('we test organisms', () => {
 
         // THEN
         expect(timeCalled).toBe(1)
+    })
+
+    test('can render itself', () => {
+        // GIVEN
+        const organism = Organism()
+
+        // THEN
+        expect(organism.render).toBeDefined()
     })
 })
