@@ -9,6 +9,12 @@ export default (CellFactory, OrganismFactory, width, height) => {
 
     const positionedCells = [];
 
+    const isNeighbourOf = source => target => {
+        return target.cell !== source.cell
+            && Math.abs(target.position.x - source.position.x) <= 1
+            && Math.abs(target.position.y - source.position.y) <= 1
+    }
+
     range(0, width*height - 1).forEach(i => {
         positionedCells.push({
             cell: CellFactory(OrganismFactory),
@@ -17,14 +23,9 @@ export default (CellFactory, OrganismFactory, width, height) => {
     })
 
     positionedCells.forEach(source => {
-        source.cell.add(
-            positionedCells.filter(target => {
-                return target.cell !== source.cell
-                    && Math.abs(target.position.x - source.position.x) <= 1
-                    && Math.abs(target.position.y - source.position.y) <= 1
-            })
-            .map(positionedCell => positionedCell.cell)
-        )
+        source.cell.add(positionedCells
+            .filter(isNeighbourOf(source))
+            .map(positionedCell => positionedCell.cell))
     })
 
     const getCoords = (col, row) => {
@@ -34,31 +35,30 @@ export default (CellFactory, OrganismFactory, width, height) => {
         }
     }
 
-    const renderCellWith = context => (positionedCell) => {
-        //debugger
+    const renderCellWith = context => positionedCell => {
         const coords = getCoords(positionedCell.position.x, positionedCell.position.y)
 
         context.beginPath()
         context.translate(coords.x, coords.y)
 
-        //
         positionedCell.cell.render(context, GRID_WIDTH,GRID_HEIGHT)
 
-        //
         context.fill()
         context.translate(-coords.x, -coords.y)
     }
 
-    const initialize = (initialDispatch)  => {
-        initialDispatch.forEach(dispatch => {
-            positionedCells
-                .filter(({position}) => dispatch.x === position.x && dispatch.y === position.y)
-                .map(({cell}) => {
-                    cell.receive(dispatch.spores)
-                    cell.incubate(cell)
-                })
-        })
+    const initializeCell = dispatch => positionedCells
+        .filter(findCellAt(dispatch))
+        .map(generateOrganism(dispatch.spores))
+
+    const findCellAt = ({ x, y }) => ({position}) => x === position.x && y === position.y
+
+    const generateOrganism = spores => ({cell}) => {
+        cell.receive(spores)
+        cell.incubate(cell)
     }
+
+    const initialize = initialDispatch => initialDispatch.forEach(initializeCell)
 
     const render = (context, width, height) => {
         context.clearRect(0, 0, width, height);
