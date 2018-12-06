@@ -22,6 +22,23 @@ describe('we test world', () => {
         expect(timeCalled).toBe(9)
     })
 
+    test('the neighbours are added to the cells', () => {
+        // GIVEN
+        let timeCalled = 0;
+
+        const CellMock = () => {
+            return {
+                add: () => { timeCalled++ }
+            }
+        }
+
+        // WHEN
+        World(CellMock, {}, 2, 5)
+
+        // THEN
+        expect(timeCalled).toBe(10)
+    })
+
     test('world can render itself', () => {
         const world = World()
 
