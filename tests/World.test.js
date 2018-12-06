@@ -53,6 +53,7 @@ describe('we test world', () => {
 
     test('when world initializes, each marked cell receive n spores', () => {
         let sporesDispatched = 0;
+        let incubateCalled = 0;
 
         const initialDispatch = [
             {x: 0, y: 0, spores: 1},
@@ -64,16 +65,15 @@ describe('we test world', () => {
         const CellMock = () => {
             return {
                 add: () => {},
-                incubate: () => {},
-                receive: (spores) => {
-                    sporesDispatched += spores
-                }
+                incubate: () => { incubateCalled++ },
+                receive: (spores) => { sporesDispatched += spores }
             }
         }
 
         const world = World(CellMock, {}, 3, 3)
         world.initialize(initialDispatch)
         expect(sporesDispatched).toBe(10)
+        expect(incubateCalled).toBe(9)
     })
 
     test('world makes each cell to dispatch on new cycle', () => {
