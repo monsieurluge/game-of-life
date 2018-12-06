@@ -6,7 +6,6 @@ describe('we test world', () => {
         const CellMock = () => {
             return {
                 add: () => {},
-                getPosition: () => { return { x: 0, y: 0} }
             }
         }
 
@@ -27,7 +26,6 @@ describe('we test world', () => {
             return {
                 add: () => {},
                 incubate: () => {},
-                getPosition: () => { return { x: 0, y: 0} }
             }
         }
 
@@ -45,7 +43,6 @@ describe('we test world', () => {
         const CellMock = () => {
             return {
                 add: () => { timeCalled++ },
-                getPosition: () => { return { x: 0, y: 0} }
             }
         }
 
@@ -61,7 +58,6 @@ describe('we test world', () => {
         const CellMock = () => {
             return {
                 add: () => {},
-                getPosition: () => { return { x: 0, y: 0} }
             }
         }
 
@@ -77,7 +73,6 @@ describe('we test world', () => {
         const CellMock = () => {
             return {
                 add: () => {},
-                getPosition: () => { return { x: 0, y: 0} }
             }
         }
 
@@ -88,7 +83,7 @@ describe('we test world', () => {
         expect(world.startCycle).toBeDefined()
     })
 
-    test.skip('when world initializes, each marked cell receive n spores', () => {
+    test('when world initializes, each marked cell receive n spores', () => {
         // GIVEN
         let sporesDispatched = 0;
         let incubateCalled = 0;
@@ -104,8 +99,7 @@ describe('we test world', () => {
             return {
                 add: () => {},
                 incubate: () => { incubateCalled++ },
-                receive: (spores) => { sporesDispatched += spores },
-                getPosition: () => { return { x: 0, y: 0} }
+                receive: (spores) => { sporesDispatched += spores }
             }
         }
 
@@ -116,10 +110,10 @@ describe('we test world', () => {
 
         // THEN
         expect(sporesDispatched).toBe(10)
-        expect(incubateCalled).toBe(9)
+        expect(incubateCalled).toBe(4)
     })
 
-    test.skip('world makes each cell to dispatch on new cycle', () => {
+    test('world makes each cell to dispatch on new cycle', () => {
         // GIVEN
         let timeDispatchCalled = 0;
         let timeIncubateCalled = 0;
@@ -129,7 +123,6 @@ describe('we test world', () => {
                 add: () => {},
                 incubate: () => { timeIncubateCalled++ },
                 dispatch: () => { timeDispatchCalled++ },
-                getPosition: () => { return { x: 0, y: 0} }
             }
         }
 

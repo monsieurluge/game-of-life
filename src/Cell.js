@@ -1,14 +1,9 @@
-export default (Organism, x, y) => {
+export default (Organism) => {
     let totalSpores = 0
     let organism
     let neighbours = []
 
-    function getPosition() {
-        return {x, y}
-    }
-
     return {
-        getPosition,
         add: (newNeighbour) => {
             newNeighbour.map(n => neighbours.push(n))
         },
