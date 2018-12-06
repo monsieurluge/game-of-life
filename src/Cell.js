@@ -34,8 +34,12 @@ export default (Organism) => {
             organism = undefined
         },
         render: (ctx, width, height) => {
-            if(organism) {
-                ctx.rect(1, 1, width-2,height-2);
+            ctx.strokeStyle="rgba(0,0,0,0.1)"
+            ctx.lineWidth=1
+            ctx.strokeRect(0, 0, width, height)
+
+            if (organism) {
+                organism.render(ctx, width, height);
             }
         }
     };

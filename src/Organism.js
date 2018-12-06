@@ -16,6 +16,10 @@ export default (cell) => {
 
     const live = () => cell.eatSpores()
     const spread = () => cell.dispatch()
+    const render = (ctx, width, height) => {
+        ctx.fillStyle="#ff0000"
+        ctx.arc(width / 2, height / 2, height / 2, 0, 2*Math.PI);
+    }
 
-    return {feed, live, spread};
+    return {feed, live, spread, render};
 };
