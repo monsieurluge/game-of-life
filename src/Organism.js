@@ -5,21 +5,26 @@ export default (cell) => {
         if (2 === spores && 0 === age) {
             cell.dying();
         }
+
         if (2 > spores) {
             cell.dying();
         }
+
         if (3 < spores) {
             cell.dying();
         }
+
         age++;
     }
 
     const live = () => cell.eatSpores()
+
     const spread = () => cell.dispatch()
+
     const render = (ctx, width, height) => {
         ctx.fillStyle="#ff0000"
         ctx.arc(width / 2, height / 2, height / 2, 0, 2*Math.PI);
     }
 
-    return {feed, live, spread, render};
+    return { feed, live, spread, render };
 };

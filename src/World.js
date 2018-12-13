@@ -59,12 +59,10 @@ export default (CellFactory, OrganismFactory) => {
         )
     }
 
-    const initialize = (width, height, initialDispatch) => {
+    const initialize = (width, height) => {
         createLocations(width, height)
 
         locations.map(createNeighbourhood)
-
-        initialDispatch.forEach(initializeCell)
     }
 
     const render = (context, width, height) => {
@@ -77,6 +75,8 @@ export default (CellFactory, OrganismFactory) => {
         locations.forEach(({cell}) => cell.incubate(cell))
     }
 
-    return { initialize, render, startCycle }
+    const sow = dispatch => dispatch.forEach(initializeCell)
+
+    return { initialize, render, startCycle, sow }
 
 }
