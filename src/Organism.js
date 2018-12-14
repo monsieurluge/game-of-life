@@ -22,8 +22,8 @@ export default (cell) => {
     const spread = () => cell.dispatch()
 
     const render = (ctx, width, height) => {
-        ctx.fillStyle="#ff0000"
-        ctx.arc(width / 2, height / 2, height / 2, 0, 2*Math.PI);
+        ctx.fillStyle="#4bb1d2"
+        ctx.arc(width / 2,height / 2, (height-2) / 2, 0, 2*Math.PI);
     }
 
     return { feed, live, spread, render };

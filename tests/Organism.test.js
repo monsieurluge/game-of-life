@@ -110,6 +110,23 @@ describe('we test organisms', () => {
         // THEN
         expect(timeCalled).toBe(1)
     })
+  
+    test('feed 0 spore => die', () => {
+        // GIVEN
+        let timeCalled = 0;
+
+        const mockedCell = {
+            dying: () => { timeCalled++ }
+        }
+
+        const organism = Organism( mockedCell )
+
+        // WHEN
+        organism.feed(0)
+
+        // THEN
+        expect(timeCalled).toBe(1)
+    })
 
     test('feed 4 spore => die', () => {
         // GIVEN

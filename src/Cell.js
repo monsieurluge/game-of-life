@@ -34,7 +34,7 @@ export default (Organism) => {
             organism = undefined
         },
         render: (ctx, width, height) => {
-            ctx.strokeStyle="rgba(0,0,0,0.1)"
+            ctx.strokeStyle="#f7f7f7"
             ctx.lineWidth=1
             ctx.strokeRect(0, 0, width, height)
 

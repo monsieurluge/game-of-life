@@ -1,3 +1,10 @@
+export const one = {
+  name: 'one',
+  positions: [
+    { x: 0, y: 0 },
+  ]
+}
+
 export const block = {
   name: 'block',
   positions: [

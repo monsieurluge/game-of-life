@@ -19,9 +19,9 @@ farmer.sow(world)
 window.setInterval(() => {
     world.startCycle(),
     world.render(ctx, canvas.width, canvas.height)
-}, 30)
+}, 10)
 
 window.setInterval(() => {
     farmer.prepare({name: 'glider', x: 0, y: 0})
     farmer.sow(world)
-}, 1000)
+}, 500)
