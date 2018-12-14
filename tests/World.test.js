@@ -54,7 +54,7 @@ describe('we test world', () => {
         expect(neighboursAdded).toBe(9)
     })
 
-    test.only('spores can be dispatched', () => {
+    test('spores can be dispatched', () => {
         // GIVEN
         let sporesDispatched = 0;
         let incubateCalled = 0;

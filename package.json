@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --watch --mode=development --content-base=dist --watch-content-base=true",
+    "dev-live": "webpack-dev-server --watch --mode=development --content-base=dist --watch-content-base=true --devtool eval --host 0.0.0.0",
     "build": "webpack --watch --mode=production",
     "test": "jest --watchAll"
   },
