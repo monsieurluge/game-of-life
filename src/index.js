@@ -8,13 +8,14 @@ const canvas=document.getElementById("game");
 const ctx=canvas.getContext("2d");
 
 const world = World(Cell, Organism)
-const farmer = Farmer([block, glider])
+const farmer = new Farmer([block, glider])
 
 world.initialize(50, 50)
 
-farmer.prepare({name: 'block', x: 15, y: 15})
-farmer.prepare({name: 'glider', x: 0, y: 0})
-farmer.sow(world)
+farmer
+  .prepare({name: 'block', x: 15, y: 15})
+  .prepare({name: 'glider', x: 0, y: 0})
+  .sow(world)
 
 window.setInterval(() => {
     world.startCycle(),
@@ -22,6 +23,7 @@ window.setInterval(() => {
 }, 30)
 
 window.setInterval(() => {
-    farmer.prepare({name: 'glider', x: 0, y: 0})
-    farmer.sow(world)
+    farmer
+      .prepare({name: 'glider', x: 0, y: 0})
+      .sow(world)
 }, 1000)
